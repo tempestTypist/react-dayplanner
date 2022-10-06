@@ -1,0 +1,322 @@
+@font-face {
+  font-family: Jack-Simba;
+  src: url(../fonts/jack_simba/Jack-Simba.otf);
+}
+
+@font-face {
+  font-family: Sweet-Talk;
+  src: url(../fonts/sweet_talk/Sweet\ Talk.otf);
+}
+
+/* Include the padding and border in an element's total width and height */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e0aaff;
+  background-image: url("https://www.transparenttextures.com/patterns/blu-stripes.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  font-family: Sweet-Talk, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Jack-Simba', 'Open Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 3.2rem; }
+
+h2 {
+  font-size: 3rem; }
+
+h3 {
+  font-size: 2.8rem; }
+
+h4 {
+  font-size: 2.6rem; }
+
+h5 {
+  font-size: 2.4rem; }
+
+h6 {
+  font-size: 2.2rem; }
+
+input:focus {
+  outline: none;
+}
+
+.banner {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-shadow: 6px 3px #000;
+  font-size: 3.6rem;
+  background-color: black;
+  background-image: url('../images/sunrise.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid grey;
+  box-shadow: 0 0 20px 0 rgb(0, 0, 0, .8);
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0, .4);
+  padding: 8px 8px;
+  margin-bottom: 1.4rem;
+  background-color: #9D4EDD;
+  background-image: url("https://www.transparenttextures.com/patterns/brilliant.png");
+  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+.softcard-container {
+  border: 3px dashed #c77dff;
+  border-radius: 12px;
+  padding: 1.4rem 1.4rem;
+}
+
+.toast-error {
+  background-color: #f17863;
+  border: 1px solid #d45842;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.dayplanner-container {
+  padding: 0;
+  height: 100%; }
+
+.timeblock-row {
+  white-space: pre-wrap;
+  border-bottom: 1px solid #3C096C; }
+  .timeblock-row:last-child {
+    border-bottom: none; }
+  .timeblock-row:nth-child(even) {
+    background-color: rgb(0, 0, 0, .05) }
+  .timeblock-row textarea {
+    background-color: transparent;
+    color: black;
+    font-size: 1.4rem }
+    /* .past {
+      display: none } */
+
+.hour {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: #000;
+  background-color: transparent;
+  align-self: center;
+}
+
+.description {
+  white-space: pre-wrap; }
+  .description textarea {
+    color: #240541;
+    border: none;
+    border-left: 1px solid #3C096C;
+    border-radius: 0;
+    outline: none; 
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    resize: none;  }
+    .description textarea:focus {
+      background-color: transparent}
+
+.weather-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+.weather-icons {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4; }
+  .weather-icons li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #c77dff;
+    background-color: #5A189A;
+    width: 64px;
+    height: 64px;
+    margin-left: 15px;
+    border-radius: 30px; }
+    .weather-icons .current-weather {
+      background-color: #00afdb; }
+    .weather-icons .current-weather .weather-badge {
+      background-color: #00afdb;
+      border-color: #fff;
+      color: #fff }
+
+.current-weather [data-icon="sun"] {
+  color: #ffbc42 }
+.current-weather [data-icon="cloud"],
+.current-weather [data-icon="wind"] {
+  color: #e7f9ff }
+.current-weather [data-icon="cloud-showers-heavy"] {
+  color: #19529e }
+.current-weather [data-icon="bolt"] {
+  color: #ffbc42 }
+
+.weather-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #c77dff;
+  background-color: #5A189A;
+  width: 56px;
+  height: 56px;
+  border: 2px dashed #c77dff;
+  border-radius: 30px; 
+}
+
+            
+
+
+.complete {
+  text-decoration: line-through;
+  opacity: 0.4;
+}
+
+.todo-form {
+  margin-bottom: 1rem;
+}
+
+.bucket-form {
+  margin-bottom: 32px;
+}
+
+.todo-input {
+  padding: 14px 32px 14px 16px;
+  border: 3px dashed #c77dff;
+  border-radius: 12px;
+  outline: none;
+  background: #ab5cec;
+  color: #fff; }
+  .todo-input:focus {
+    outline: none;
+    background: #ab5cec; }
+
+.todo-input::placeholder {
+  color: #e2e2e2;
+}
+
+.bucket-button {
+  padding: 16px;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  background: #5d0cff;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.todo-input.edit {
+  border: 2px solid #149fff;
+}
+
+.bucket-button.edit {
+  background: linear-gradient(
+    90deg,
+    rgba(20, 159, 255, 1) 0%,
+    rgba(17, 122, 255, 1) 100%
+  );
+  padding: 16px 22px;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px auto;
+  padding: 16px;
+  border: 3px dashed #c77dff;
+  border-radius: 5px;
+  width: 100%;
+  background-color: #7B2CBF;
+}
+
+/* .low {
+  background: linear-gradient(
+    90deg,
+    rgba(93, 12, 255, 1) 0%,
+    rgba(155, 0, 250, 1) 100%
+  );
+}
+
+.medium {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 12, 241, 1) 0%,
+    rgba(250, 0, 135, 1) 100%
+  );
+}
+
+.high {
+  background: linear-gradient(
+    90deg,
+    rgba(20, 159, 255, 1) 0%,
+    rgba(17, 122, 255, 1) 100%
+  );
+} */
+
+.icons {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  margin-right: 5px;
+  color: #fff;
+}
+
+.edit-icon {
+  color: #fff;
+}
+
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #ec5700;
+  border-radius: 4px;
+  color: white;
+  padding: 16px;
+  width: 100%;
+  border: none;
+}
+
+
+
+
+
+.glasses {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+  padding-left: 0;
+  list-style: none; }
+  .glasses li img {
+    height: 100px;
+    padding-right: 1rem
+  }
