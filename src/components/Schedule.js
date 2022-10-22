@@ -369,9 +369,7 @@ const Schedule = () => {
 
 	//check class, if 'future' then update reminder with value input
 	const handleInputChange = (e) => {
-		let className = e.target.className;
-		let value = e.target.value
-		let id = e.target.id
+		let { className, value, id } = e.target
 
 		if (className === 'timeblock-row future form-control') {
 			values[id].reminder = value
@@ -387,8 +385,8 @@ const Schedule = () => {
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
 
-		localStorage.setItem("values", JSON.stringify(values));
-		console.log("Values saved!")
+		// localStorage.setItem("values", JSON.stringify(values));
+		// console.log("Values saved!")
 		// let storedDay = JSON.parse(localStorage.getItem("values"));
 		// let midnight = "0:00:00";
 		// let now;
@@ -588,42 +586,40 @@ const Schedule = () => {
 	};
 
   useEffect(() => {	
+		setValue( values )
+    // if (localStorage) {
+    //   let locallystoredDay = localStorage.getItem("values");
 
-    if (localStorage) {
-      let locallystoredDay = localStorage.getItem("values");
+    //   if (locallystoredDay) {
+    //     let storedDay = JSON.parse(locallystoredDay);
+		// 		let midnight = "0:00:00";
+		// 		let now;
 
-      if (locallystoredDay) {
-        let storedDay = JSON.parse(locallystoredDay);
-				let midnight = "0:00:00";
-				let now;
+		// 		setValue( [...storedDay] );
 
-				setValue( [...storedDay] );
+		// 		let currentDate = moment().format("MM DD YYYY")
 
-				let currentDate = moment().format("MM DD YYYY")
+		// 		// setInterval(function() {
+		// 		// 	now = moment().format("H:mm:ss")
+		// 		// 	if (now === midnight) {
+		// 		// 		setValue( values )
+		// 		// 		console.log(values)
+		// 		// 		console.log("Midnight - Values reset!")
+		// 		// 	} else {
+		// 		// 		setValue( [...storedDay] );
+		// 		// 		console.log([...storedDay])
+		// 		// 		console.log("Today updated with StoredDay!")
+		// 		// 	}
+		// 		// }, 10000);
 
+    //   } else {
+		// 		setValue( values )
+		// 	}
 
-				// setInterval(function() {
-				// 	now = moment().format("H:mm:ss")
-				// 	if (now === midnight) {
-				// 		setValue( values )
-				// 		console.log(values)
-				// 		console.log("Midnight - Values reset!")
-				// 	} else {
-				// 		setValue( [...storedDay] );
-				// 		console.log([...storedDay])
-				// 		console.log("Today updated with StoredDay!")
-				// 	}
-				// }, 10000);
-
-      } else {
-				setValue( values )
-			}
-
-
-		} else {
-			setValue( values )
-			console.log(values)
-			console.log("set today") }
+		// } else {
+		// 	setValue( values )
+		// 	console.log(values)
+		// 	console.log("set today") }
   }, []);
 
   return (

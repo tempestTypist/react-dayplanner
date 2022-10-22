@@ -3,8 +3,6 @@ import { Card } from 'react-bootstrap';
 import worter from '../assets/images/worter-full.png'
 import bortle from '../assets/images/worter.png'
 
-
-
 const Hydration = () => {
 
 	const [water, drinkWater] = useState([{id: 'one-bottle'}, {id: 'two-bottle'}, {id: 'three-bottle'}, {id: 'four-bottle'}, {id: 'five-bottle'}, {id: 'six-bottle'}, {id: 'seven-bottle'}, {id: 'eight-bottle'} ]);
@@ -12,9 +10,9 @@ const Hydration = () => {
 	const waterbottles = water.map((bottle, i) => {
 		return <li id={bottle} key={i} >
 			<img onClick={() => setDrank(bottle)} src={
-			bottle.isDrank
-			? worter
-			: bortle
+				bottle.isDrank
+				? worter
+				: bortle
 			} />
 		</li>
 	});
@@ -29,19 +27,20 @@ const Hydration = () => {
     });
 
     drinkWater(clickedBottle);
-		localStorage.setItem("water", JSON.stringify(water));
+		// localStorage.setItem("water", JSON.stringify(water));
   };
 
 	useEffect(() => {	
-    if (localStorage) {
-      let waterDrank = localStorage.getItem("water");
-			if (waterDrank) {
-				let storedWater = JSON.parse(waterDrank);
-				drinkWater( [...storedWater] );
-			}
-		} else {
-			drinkWater(water)
-		}
+		drinkWater(water)
+    // if (localStorage) {
+    //   let waterDrank = localStorage.getItem("water");
+		// 	if (waterDrank) {
+		// 		let storedWater = JSON.parse(waterDrank);
+		// 		drinkWater( [...storedWater] );
+		// 	}
+		// } else {
+		// 	drinkWater(water)
+		// }
   }, []);
 
   return (
