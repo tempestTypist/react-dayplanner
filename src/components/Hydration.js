@@ -48,7 +48,7 @@ const Hydration = () => {
 		<div className="water-container softcard-container">
 			<ul className="glasses">
 				{waterbottles}
-			</ul>			
+			</ul>
 		</div>
 	</Card>
   );

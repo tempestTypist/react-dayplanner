@@ -1,181 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Form, Row, Col, Card, Toast, Button } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Form, Row, Col, Card, Toast } from 'react-bootstrap';
 import moment from "moment";
 
 const Schedule = () => {
-
-	const today = [
-		{
-			id: "0",
-			hour: "12",
-			time: "00",
-			ampm: "am",
-			reminder: ""
-		},
-		{
-			id: "1",
-			hour: "1",
-			time: "01",
-			ampm: "am",
-			reminder: ""
-		},
-		{
-			id: "2",
-			hour: "2",
-			time: "02",
-			ampm: "am",
-			reminder: ""
-		},
-		{
-			id: "3",
-			hour: "3",
-			time: "03",
-			ampm: "am",
-			reminder: ""
-		},
-		{
-			id: "4",
-			hour: "4",
-			time: "04",
-			ampm: "am",
-			reminder: ""
-		},
-		{
-			id: "5",
-			hour: "5",
-			time: "05",
-			ampm: "am",
-			reminder: ""
-		},
-		{
-			id: "6",
-			hour: "6",
-			time: "06",
-			ampm: "am",
-			reminder: ""
-		},
-		{
-			id: "7",
-			hour: "7",
-			time: "07",
-			ampm: "am",
-			reminder: ""
-		},
-		{
-			id: "8",
-			hour: "8",
-			time: "08",
-			ampm: "am",
-			reminder: ""
-		},
-		{
-			id: "9",
-			hour: "9",
-			time: "09",
-			ampm: "am",
-			reminder: ""
-		},
-		{
-				id: "10",
-				hour: "10",
-				time: "10",
-				ampm: "am",
-				reminder: ""
-		},
-		{
-				id: "11",
-				hour: "11",
-				time: "11",
-				ampm: "am",
-				reminder: ""
-		},
-		{
-				id: "12",
-				hour: "12",
-				time: "12",
-				ampm: "pm",
-				reminder: ""
-		},
-		{
-				id: "13",
-				hour: "1",
-				time: "13",
-				ampm: "pm",
-				reminder: ""
-		},
-		{
-				id: "14",
-				hour: "2",
-				time: "14",
-				ampm: "pm",
-				reminder: ""
-		},
-		{
-				id: "15",
-				hour: "3",
-				time: "15",
-				ampm: "pm",
-				reminder: ""
-		},
-		{
-				id: "16",
-				hour: "4",
-				time: "16",
-				ampm: "pm",
-				reminder: ""
-		},
-		{
-				id: "17",
-				hour: "5",
-				time: "17",
-				ampm: "pm",
-				reminder: ""
-		},
-		{
-			id: "18",
-			hour: "6",
-			time: "18",
-			ampm: "pm",
-			reminder: ""
-		},
-		{
-			id: "19",
-			hour: "7",
-			time: "19",
-			ampm: "pm",
-			reminder: ""
-		},
-		{
-			id: "20",
-			hour: "8",
-			time: "20",
-			ampm: "pm",
-			reminder: ""
-		},
-		{
-			id: "21",
-			hour: "9",
-			time: "21",
-			ampm: "pm",
-			reminder: ""
-		},
-		{
-			id: "22",
-			hour: "10",
-			time: "22",
-			ampm: "pm",
-			reminder: ""
-		},
-		{
-			id: "23",
-			hour: "11",
-			time: "23",
-			ampm: "pm",
-			reminder: ""
-		}
-	]
-
-	const [position, setPosition] = useState('top-start');
 	const [show, setShow] = useState(false);
 	const [values, setValue] = useState([
 		{
@@ -585,42 +412,42 @@ const Schedule = () => {
 		// }, 10000);
 	};
 
-  useEffect(() => {	
-		setValue( values )
-    // if (localStorage) {
-    //   let locallystoredDay = localStorage.getItem("values");
+  // useEffect(() => {	
+	// 	setValue( values )
+  //   // if (localStorage) {
+  //   //   let locallystoredDay = localStorage.getItem("values");
 
-    //   if (locallystoredDay) {
-    //     let storedDay = JSON.parse(locallystoredDay);
-		// 		let midnight = "0:00:00";
-		// 		let now;
+  //   //   if (locallystoredDay) {
+  //   //     let storedDay = JSON.parse(locallystoredDay);
+	// 	// 		let midnight = "0:00:00";
+	// 	// 		let now;
 
-		// 		setValue( [...storedDay] );
+	// 	// 		setValue( [...storedDay] );
 
-		// 		let currentDate = moment().format("MM DD YYYY")
+	// 	// 		let currentDate = moment().format("MM DD YYYY")
 
-		// 		// setInterval(function() {
-		// 		// 	now = moment().format("H:mm:ss")
-		// 		// 	if (now === midnight) {
-		// 		// 		setValue( values )
-		// 		// 		console.log(values)
-		// 		// 		console.log("Midnight - Values reset!")
-		// 		// 	} else {
-		// 		// 		setValue( [...storedDay] );
-		// 		// 		console.log([...storedDay])
-		// 		// 		console.log("Today updated with StoredDay!")
-		// 		// 	}
-		// 		// }, 10000);
+	// 	// 		// setInterval(function() {
+	// 	// 		// 	now = moment().format("H:mm:ss")
+	// 	// 		// 	if (now === midnight) {
+	// 	// 		// 		setValue( values )
+	// 	// 		// 		console.log(values)
+	// 	// 		// 		console.log("Midnight - Values reset!")
+	// 	// 		// 	} else {
+	// 	// 		// 		setValue( [...storedDay] );
+	// 	// 		// 		console.log([...storedDay])
+	// 	// 		// 		console.log("Today updated with StoredDay!")
+	// 	// 		// 	}
+	// 	// 		// }, 10000);
 
-    //   } else {
-		// 		setValue( values )
-		// 	}
+  //   //   } else {
+	// 	// 		setValue( values )
+	// 	// 	}
 
-		// } else {
-		// 	setValue( values )
-		// 	console.log(values)
-		// 	console.log("set today") }
-  }, []);
+	// 	// } else {
+	// 	// 	setValue( values )
+	// 	// 	console.log(values)
+	// 	// 	console.log("set today") }
+  // }, []);
 
   return (
 	<Card>
