@@ -5,11 +5,9 @@ import { faSun, faCloud, faWind, faCloudShowersHeavy, faBolt, faSnowflake } from
 
 
 const Weather = () => {
-
-	//move this to .gitignore later
-		let APIkey = "442a360c733830bd6ebab1fdd4d285ad";
-	//move all the rest to App.js later so i can pass it as props to this component and the banner component
-		let requestUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + 42.404804 + "&lon=" + -82.191040 + "&exclude=minutely,hourly,alerts&units=metric&appid=" + APIkey;
+		let APIkey = process.env.REACT_APP_APIKEY;
+		//move all the rest to App.js later so i can pass it as props to this component and the banner component
+		let requestUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + 42.404804 + "&lon=" + -82.191040 + "&exclude=minutely,hourly,alerts&units=metric&appid=" + APIkey;
 	
 		fetch(requestUrl)
 			.then(function (response) {
@@ -33,10 +31,14 @@ const Weather = () => {
 					if (main === "Clouds") {
 						cloudy.classList.add("current-weather")
 					} 
-					
-					if (main === "Rain" || "Drizzle" ) {
+
+					if (main === "Drizzle") {
 						rainy.classList.add("current-weather")
 					} 
+					
+					if (main === "Rain") {
+						rainy.classList.add("current-weather")
+					}
 					
 					if (main === "Thunderstorm") {
 						thunder.classList.add("current-weather")
