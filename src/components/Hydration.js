@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Card } from 'react-bootstrap';
 import worter from '../assets/images/worter-full.png'
 import bortle from '../assets/images/worter.png'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TodoForm from './TodoForm';
 
 function Todo(props) {
@@ -7,8 +7,6 @@ function Todo(props) {
     value: '',
     priority: '',
   });
-
-  console.log(props.todo);
 
   const submitUpdate = (value) => {
     props.editTodo(edit.id, value);

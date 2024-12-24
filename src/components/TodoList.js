@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Card } from 'react-bootstrap';
 import TodoForm from './TodoForm';
 import Todo from './Todo';
@@ -12,16 +12,16 @@ const TodoList = () => {
       '🚀 ~ file: TodoList.js ~ line 10 ~ addTodoItem ~ item',
       item
     );
-    // Check to see if the item text is empty
+
     if (!item.text) {
       return;
     }
 
-    // Add the new bucket list item to the existing array of objects
+    // Add the new list item to the existing array of objects
     const newTodo = [item, ...todo];
     console.log(newTodo);
 
-    // Call setTodo to update state with our new set of bucket list items
+    // Call setTodo to update state with our new set of list items
     setTodo(newTodo);
   };
 

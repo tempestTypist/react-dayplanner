@@ -1,14 +1,26 @@
-import React from "react";
 import { Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSun, faCloud, faWind, faCloudShowersHeavy, faBolt, faSnowflake } from '@fortawesome/free-solid-svg-icons'
-
+import { faSun, faCloud, faWind, faCloudShowersHeavy, faBolt, faSnowflake, faSmog } from '@fortawesome/free-solid-svg-icons'
 
 const Weather = () => {
-		let APIkey = process.env.REACT_APP_APIKEY;
-		//move all the rest to App.js later so i can pass it as props to this component and the banner component
+		let APIkey = process.env.REACT_APP_APIKEY || "503207fa616c17e8668caa7738c54705";
 		let requestUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + 42.404804 + "&lon=" + -82.191040 + "&exclude=minutely,hourly,alerts&units=metric&appid=" + APIkey;
-	
+		const weatherMap = [
+			  {"Clear": {id: "weather-sunny", 
+								   icon: <FontAwesomeIcon size="2x" icon={faSun} />}},
+			  {"Windy": {id: "weather-windy", 
+								   icon: <FontAwesomeIcon size="2x" icon={faWind} />}},
+			   {"Mist": {id: "weather-misty",
+								   icon: <FontAwesomeIcon size="2x" icon={faSmog} />}},
+		   {"Clouds": {id: "weather-cloudy",
+								   icon: <FontAwesomeIcon size="2x" icon={faCloud} />}},
+			   {"Rain": {id: "weather-rainy",
+								   icon: <FontAwesomeIcon size="2x" icon={faCloudShowersHeavy} />}},
+ {"Thunderstorm": {id: "weather-thunder",
+								   icon: <FontAwesomeIcon size="2x" icon={faBolt} />}},
+			   {"Snow": {id: "weather-snowy",
+								   icon: <FontAwesomeIcon size="2x" icon={faSnowflake} />}}];
+								
 		fetch(requestUrl)
 			.then(function (response) {
 				return response.json();
@@ -16,44 +28,30 @@ const Weather = () => {
 				.then(function (weatherData) {
 					let main = weatherData.current.weather[0].main;
 					let windspeed = weatherData.current.wind_speed;
-					let sunny = document.getElementById("weather-sunny");
-					let cloudy = document.getElementById("weather-cloudy");
-					let windy = document.getElementById("weather-windy");
-					let rainy = document.getElementById("weather-rainy");
-					let thunder = document.getElementById("weather-thunder");
-					let snowy = document.getElementById("weather-snowy");
-						console.log(weatherData)
-						console.log(main)
-					if (main === "Clear") {
-						sunny.classList.add("current-weather")
-					}
-					
-					if (main === "Clouds") {
-						cloudy.classList.add("current-weather")
-					} 
 
-					if (main === "Drizzle") {
-						rainy.classList.add("current-weather")
-					} 
-					
-					if (main === "Rain") {
-						rainy.classList.add("current-weather")
+					const weatherItem = weatherMap.find(weather => Object.keys(weather)[0] === main);
+					const weatherId = weatherItem ? weatherItem[main].id : null;
+
+					if (weatherItem) {
+							let weatherElement = document.getElementById(weatherId);
+							weatherElement.classList.add("current-weather");
 					}
-					
-					if (main === "Thunderstorm") {
-						thunder.classList.add("current-weather")
-					} 
-					
-					if (main === "Snow") {
-						snowy.classList.add("current-weather")
-					} 
-					
-					if (windspeed > 11.11) {
+
+					if (weatherId === "weather-thunder") {
+						let rainy = document.getElementById("weather-rainy");
+					  let thunder = document.getElementById("weather-thunder");
+
+						rainy.classList.add("current-weather");
+						thunder.classList.add("current-weather");
+					}
+
+					if (windspeed >= 11) {
+						let windy = document.getElementById("weather-windy");
 						windy.classList.add("current-weather")
-					} else if (windspeed < 11.10) {
+					} else if (windspeed < 11) {
+						let windy = document.getElementById("weather-windy");
 						windy.classList.remove("current-weather")
 					}
-
 				});
 		
   return (
@@ -61,36 +59,17 @@ const Weather = () => {
 		<div className="weather-container softcard-container">
 			<h2>Weather</h2>
 			<ul className="weather-icons">
-				<li id="weather-sunny">
-					<div className="weather-badge">
-						<FontAwesomeIcon size="2x" icon={faSun} />
-					</div>
-				</li>
-				<li id="weather-cloudy">
-					<div className="weather-badge">
-						<FontAwesomeIcon size="2x" icon={faCloud} />	
-					</div>
-				</li>
-				<li id="weather-windy">
-					<div className="weather-badge">
-						<FontAwesomeIcon size="2x" icon={faWind} />
-					</div>
-				</li>
-				<li id="weather-rainy">
-					<div className="weather-badge">
-						<FontAwesomeIcon size="2x" icon={faCloudShowersHeavy} />
-					</div>
-				</li>
-				<li id="weather-thunder">
-					<div className="weather-badge">
-						<FontAwesomeIcon size="2x" icon={faBolt} />
-					</div>
-				</li>
-				<li id="weather-snowy">
-					<div className="weather-badge">
-						<FontAwesomeIcon size="2x" icon={faSnowflake} />
-					</div>
-				</li>
+				{weatherMap.map((weather, index) => {
+					const key = Object.keys(weather)[0]; 
+					const { id, icon } = weather[key];
+					return (
+						<li id={id} key={id}>
+							<div className="weather-badge">
+								{icon}
+							</div>
+						</li>
+					);
+				})}
 			</ul>
 		</div>
 	</Card>
