@@ -59,7 +59,7 @@ const Weather = () => {
 		<div className="weather-container softcard-container">
 			<h2>Weather</h2>
 			<ul className="weather-icons">
-				{weatherMap.map((weather, index) => {
+				{weatherMap.map((weather) => {
 					const key = Object.keys(weather)[0]; 
 					const { id, icon } = weather[key];
 					return (

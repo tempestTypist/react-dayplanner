@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from 'react-bootstrap';
 import TodoForm from './TodoForm';
 import Todo from './Todo';
@@ -6,6 +6,11 @@ import Todo from './Todo';
 const TodoList = () => {
 
   const [todo, setTodo] = useState([]);
+  const [edit, setEdit] = useState({
+    id: null,
+    value: '',
+    priority: '',
+  });
 
   const addTodo = (item) => {
     console.log(
@@ -57,21 +62,24 @@ const TodoList = () => {
   };
 
   return (
-	<Card>
-		<div className="todo-container softcard-container">
-			<h2>To Do</h2>
+    <Card>
+      <div className="todo-container softcard-container">
+        <TodoForm 
+          onSubmit={addTodo}
+          editTodo={editTodo}
+          setEdit={setEdit}
+          edit={edit} />
 
-			<TodoForm onSubmit={addTodo} />
+        <Todo
+          todo={todo}
+          completeTodo={completeTodo}
+          removeTodo={removeTodo}
+          setEdit={setEdit}
+          edit={edit}>
+        </Todo>
 
-			<Todo
-				todo={todo}
-				completeTodo={completeTodo}
-				removeTodo={removeTodo}
-				editTodo={editTodo}>
-			</Todo>
-
-		</div>
-	</Card>
+      </div>
+    </Card>
   );
 };
 
