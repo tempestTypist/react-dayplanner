@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import TodoForm from './TodoForm';
-
 function Todo(props) {
 
   return props.todo.map((item, i) => (
@@ -17,7 +14,6 @@ function Todo(props) {
       </div>
 
       <div className="icons">
-        {console.log(item)}
         <p onClick={() => props.setEdit({ id: item.id, value: item.text, priority: item.priority })}> ✏️</p>
         <p onClick={() => props.removeTodo(item.id)}> 🗑️</p>
       </div>

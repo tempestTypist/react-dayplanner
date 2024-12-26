@@ -8,11 +8,6 @@ function TodoForm(props) {
 
   const priorityLevel = ['high', 'medium', 'low']
 
-  const submitUpdate = (value) => {
-    props.editTodo(props.edit.id, value);
-    props.setEdit({ id: null, value: '', priority: '' });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,7 +39,7 @@ function TodoForm(props) {
       :
         <h2>To Do</h2>}
 
-			<Form className="todo-form" onSubmit={props.edit.id ? submitUpdate : handleSubmit}>
+			<Form className="todo-form" onSubmit={handleSubmit}>
 				<Form.Group as={Row}>
 					<Col md={8}>
             <Form.Control 
@@ -69,12 +64,7 @@ function TodoForm(props) {
             </Dropdown>
 					</Col>
 					<Col md={2}>
-						<Button 
-              type="submit" 
-              className="bucket-button"
-              onClick={props.edit.id ?
-                        () => submitUpdate :
-                        () => handleSubmit}>
+						<Button type="submit" className="bucket-button">
                 {props.edit.id ? "Update" : "Add"}
             </Button>
 					</Col>

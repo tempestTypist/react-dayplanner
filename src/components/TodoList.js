@@ -61,22 +61,24 @@ const TodoList = () => {
     );
   };
 
+  const submitUpdate = (value) => {
+    editTodo(edit.id, value);
+    setEdit({ id: null, value: '', priority: '' });
+  };
+
   return (
     <Card>
       <div className="todo-container softcard-container">
         <TodoForm 
-          onSubmit={addTodo}
-          editTodo={editTodo}
-          setEdit={setEdit}
+          onSubmit={edit.id ? submitUpdate : addTodo}
           edit={edit} />
 
-        <Todo
+        {edit.id ? <></> : <Todo
           todo={todo}
           completeTodo={completeTodo}
           removeTodo={removeTodo}
-          setEdit={setEdit}
-          edit={edit}>
-        </Todo>
+          setEdit={setEdit}>
+        </Todo>}
 
       </div>
     </Card>
