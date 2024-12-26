@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card } from 'react-bootstrap';
 import TodoForm from './TodoForm';
-import Todo from './Todo';
+import { Todo } from './Todo';
 
 const TodoList = () => {
 

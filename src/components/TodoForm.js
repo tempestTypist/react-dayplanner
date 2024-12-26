@@ -64,7 +64,7 @@ function TodoForm(props) {
             </Dropdown>
 					</Col>
 					<Col md={2}>
-						<Button type="submit" className="bucket-button">
+						<Button type="submit" className="dropbtn">
                 {props.edit.id ? "Update" : "Add"}
             </Button>
 					</Col>

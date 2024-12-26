@@ -1,4 +1,7 @@
-function Todo(props) {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExclamationCircle, faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+
+export const Todo = (props) => {
 
   return props.todo.map((item, i) => (
     <div
@@ -10,15 +13,14 @@ function Todo(props) {
       key={i}>
         
       <div key={item.id} onClick={() => props.completeTodo(item.id)}>
+        <FontAwesomeIcon icon={faExclamationCircle} className="me-2" />
         {item.text}
       </div>
 
       <div className="icons">
-        <p onClick={() => props.setEdit({ id: item.id, value: item.text, priority: item.priority })}> ✏️</p>
-        <p onClick={() => props.removeTodo(item.id)}> 🗑️</p>
+        <p onClick={() => props.setEdit({ id: item.id, value: item.text, priority: item.priority })}> <FontAwesomeIcon icon={faPencilAlt} className="me-2" /></p>
+        <p onClick={() => props.removeTodo(item.id)}> <FontAwesomeIcon icon={faTrash} /></p>
       </div>
     </div>
   ));
-}
-
-export default Todo;
+};
