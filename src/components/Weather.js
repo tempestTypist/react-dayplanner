@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faCloud, faWind, faCloudShowersHeavy, faBolt, faSnowflake, faSmog } from '@fortawesome/free-solid-svg-icons'
 
 const Weather = () => {
-		let APIkey = process.env.REACT_APP_APIKEY || "503207fa616c17e8668caa7738c54705";
+		let APIkey = process.env.REACT_APP_APIKEY;
 		let requestUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + 42.404804 + "&lon=" + -82.191040 + "&exclude=minutely,hourly,alerts&units=metric&appid=" + APIkey;
 		const weatherMap = [
 			  {"Clear": {id: "weather-sunny", 
