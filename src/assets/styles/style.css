@@ -61,13 +61,104 @@ input:focus {
   text-shadow: 6px 3px #000;
   font-size: 3.6rem;
   background-color: black;
-  background-image: url('../images/sunrise.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: top;
+  background-position: center;
   margin-bottom: 2rem;
   border-bottom: 1px solid grey;
   box-shadow: 0 0 20px 0 rgb(0, 0, 0, .8);
+}
+
+.banner.morning {
+  background-image: url('../images/banner-images/morning.jpg');
+}
+
+.banner.morning.cloudy {
+  background-image: url('../images/banner-images/morning-cloudy.jpg');
+}
+
+.banner.morning.rain {
+  background-image: 
+                    url('../images/banner-images/rain.gif'), 
+                    url('../images/banner-images/morning-rainy.jpg');
+  background-size: contain, cover;
+  background-repeat: repeat, no-repeat;
+  background-position: center;
+}
+
+.banner.morning.snow {
+  background-image: 
+                    url('../images/banner-images/snow.gif'), 
+                    url('../images/banner-images/morning-rainy.jpg');
+  background-size: contain, cover;
+  background-repeat: repeat, no-repeat;
+  background-position: center;
+}
+
+.banner.afternoon {
+  background-image: url('../images/banner-images/afternoon.jpg');
+}
+
+.banner.afternoon.cloudy {
+  background-image: url('../images/banner-images/afternoon-cloudy.jpg');
+}
+
+.banner.afternoon.rain {
+  background-image: 
+                    url('../images/banner-images/rain.gif'), 
+                    url('../images/banner-images/afternoon-rain.jpg');
+  background-size: contain, cover;
+  background-repeat: repeat, no-repeat;
+  background-position: center;
+}
+
+.banner.afternoon.snow {
+  background-image: 
+                    url('../images/banner-images/snow.gif'), 
+                    url('../images/banner-images/afternoon-rain.jpg');
+  background-size: contain, cover;
+  background-repeat: repeat, no-repeat;
+  background-position: center;
+}
+
+.banner.twilight {
+  background-image: url('../images/banner-images/twilight.jpg');
+}
+
+.banner.twilight.rain {
+  background-image: url('../images/banner-images/rain.gif'), url('../images/banner-images/twilight.jpg');
+  background-size: contain, cover;
+  background-repeat: repeat, no-repeat;
+  background-position: center;
+}
+
+.banner.twilight.snow {
+  background-image: url('../images/banner-images/snow.gif'), url('../images/banner-images/twilight.jpg');
+  background-size: contain, cover;
+  background-repeat: repeat, no-repeat;
+  background-position: center;
+}
+
+.banner.night {
+  background-image: url('../images/banner-images/night.jpg');
+}
+
+.banner.night.cloudy {
+  background-image: url('../images/banner-images/night-cloudy.jpg');
+}
+
+.banner.night.rain {
+  background-image: url('../images/banner-images/rain.gif'), url('../images/banner-images/night-cloudy.jpg');
+  background-size: contain, cover;
+  background-repeat: repeat, no-repeat;
+  background-position: center;
+}
+
+.banner.night.snow {
+  background-image: url('../images/banner-images/snow.gif'), url('../images/banner-images/night-cloudy.jpg');
+  background-size: contain, cover;
+  background-repeat: repeat, no-repeat;
+  background-position: center;
 }
 
 .card {

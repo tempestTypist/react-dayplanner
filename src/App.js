@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Banner from './components/Banner';
 import Schedule from './components/Schedule';
-import Notifications from './components/Notifications';
+// import Notifications from './components/Notifications';
 import Weather from './components/Weather';
 import TodoList from './components/TodoList';
 import Hydration from './components/Hydration';
@@ -22,7 +22,7 @@ function App() {
           <Schedule />
         </Col>
         <Col>
-          <Notifications />
+          {/* <Notifications /> */}
           <Weather />
           <TodoList />
           <Hydration />
