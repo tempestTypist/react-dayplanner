@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap';
 
-const Banner = () => {
+const Banner = ({ weather }) => {
 
   const times = {
     night: [[0, 5], [21, 24]],
@@ -16,10 +16,10 @@ const Banner = () => {
       return "banner afternoon";
     }
   
-    for (const [className, ranges] of Object.entries(times)) {
+    for (const [time, ranges] of Object.entries(times)) {
       for (const [start, end] of ranges) {
         if (hour >= start && hour <= end) {
-          return `banner ${className}`;
+          return `banner ${time} ${weather ? weather : null}`;
         }
       }
     }
