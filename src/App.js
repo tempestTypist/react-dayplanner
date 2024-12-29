@@ -25,6 +25,8 @@ function App() {
         const windspeed = weatherData.current.wind_speed;
         setWeather(main);
         setWindspeed(windspeed);
+        console.log(main);
+        console.log(windspeed); 
       })
       .catch(error => console.error('Error fetching weather data:', error));
   }, []);
