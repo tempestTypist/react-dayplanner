@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faExclamationCircle, faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faExclamationCircle, faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
 export const Todo = (props) => {
 
@@ -13,7 +13,11 @@ export const Todo = (props) => {
       key={i}>
         
       <div key={item.id} onClick={() => props.completeTodo(item.id)}>
-        <FontAwesomeIcon icon={faExclamationCircle} className="me-2" />
+        <FontAwesomeIcon 
+          icon={
+            item.isComplete 
+              ? faCheck
+              : faExclamationCircle} className="me-2" />
         {item.text}
       </div>
 

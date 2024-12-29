@@ -278,9 +278,19 @@ input:focus {
 
 
 .complete {
+  position: relative;
   text-decoration: line-through;
   opacity: 0.4;
 }
+
+/* .complete::after {
+content: "";
+position: absolute;
+width: 100%;
+height: 2px;
+top: 50%;
+left: 0;
+background: red; } */
 
 .todo-form {
   margin-bottom: 1rem;
@@ -333,15 +343,15 @@ input:focus {
   border: 3px dashed #FF898A;
 }
 
-.todo-item.low .fa-exclamation-circle {
+.todo-item.low > div:first-child svg {
   color: #8CE993
 }
 
-.todo-item.medium .fa-exclamation-circle {
+.todo-item.medium > div:first-child svg {
   color: #FFF683
 }
 
-.todo-item.high .fa-exclamation-circle {
+.todo-item.high > div:first-child svg {
   color: #FF898A
 }
 

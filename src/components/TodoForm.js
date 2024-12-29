@@ -35,9 +35,7 @@ function TodoForm(props) {
   return (
     <div>
       {props.edit.id ? 
-        <h2>Update entry: {props.edit.value}</h2>
-      :
-        <h2>To Do</h2>}
+        <h2>Update entry: {props.edit.value}</h2> : <h2>To Do</h2>}
 
 			<Form className="todo-form" onSubmit={handleSubmit}>
 				<Form.Group as={Row}>
