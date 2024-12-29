@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Toast } from 'react-bootstrap';
 import Banner from './components/Banner';
 import Schedule from './components/Schedule';
 // import Notifications from './components/Notifications';
@@ -14,6 +14,8 @@ function App() {
   let requestUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + 42.404804 + "&lon=" + -82.191040 + "&exclude=minutely,hourly,alerts&units=metric&appid=" + APIkey;
   const [weather, setWeather] = useState(null);
   const [windspeed, setWindspeed] = useState(null);
+  const [show, setShow] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     fetch(requestUrl)
@@ -21,12 +23,11 @@ function App() {
         return response.json();
       })
       .then(function (weatherData) {
+        console.log(weatherData)
         const main = weatherData.current.weather[0].main;
         const windspeed = weatherData.current.wind_speed;
         setWeather(main);
         setWindspeed(windspeed);
-        console.log(main);
-        console.log(windspeed); 
       })
       .catch(error => console.error('Error fetching weather data:', error));
   }, []);
@@ -43,15 +44,20 @@ function App() {
     <Container fluid>
       <Row>
         <Col>
-          <Schedule />
+          <Schedule setErrorMessage={setErrorMessage} setShow={setShow} />
         </Col>
         <Col>
           {/* <Notifications /> */}
           <Weather weather={weather} windspeed={windspeed} />
-          <TodoList />
+          <TodoList setErrorMessage={setErrorMessage} setShow={setShow} />
           <Hydration />
           {/* <Menu />
           <Exercise /> */}
+        </Col>
+        <Col className="error-container" xs={12}>
+          <Toast className="toast-error" onClose={() => setShow(false)} show={show} delay={3000} autohide>
+            <Toast.Body>{errorMessage}</Toast.Body>
+          </Toast>
         </Col>
       </Row>
     </Container>
