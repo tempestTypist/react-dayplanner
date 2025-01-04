@@ -1,53 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from 'react-bootstrap';
 import worter from '../assets/images/worter-full.png'
 import bortle from '../assets/images/worter.png'
 
+const createWaterBottles = (count) => {
+	return Array.from({ length: count }, (_, i) => ({
+		id: `${i + 1}-bottle`,
+		isDrank: false
+	}));
+};
+
 const Hydration = () => {
+	const [water, drinkWater] = useState(createWaterBottles(8));	
 
-	const [water, drinkWater] = useState([{id: 'one-bottle'}, {id: 'two-bottle'}, {id: 'three-bottle'}, {id: 'four-bottle'}, {id: 'five-bottle'}, {id: 'six-bottle'}, {id: 'seven-bottle'}, {id: 'eight-bottle'} ]);
-
-	const waterbottles = water.map((bottle, i) => {
-		return <li id={bottle} key={i} >
-			<img alt="Water bottle" onClick={() => setDrank(bottle)} src={
-				bottle.isDrank
-				? worter
-				: bortle
-			} />
-		</li>
-	});
-
-  const setDrank = (id) => {
-    // If the ID passed to this function matches the ID of the item that was clicked, mark it as complete
-    let clickedBottle = water.map((bottle) => {
-      if (bottle === id) {
-        bottle.isDrank = !bottle.isDrank;
-      }
-      return bottle;
-    });
-
-    drinkWater(clickedBottle);
-		// localStorage.setItem("water", JSON.stringify(water));
-  };
-
-	// useEffect(() => {	
-	// 	drinkWater(water)
-  //   // if (localStorage) {
-  //   //   let waterDrank = localStorage.getItem("water");
-	// 	// 	if (waterDrank) {
-	// 	// 		let storedWater = JSON.parse(waterDrank);
-	// 	// 		drinkWater( [...storedWater] );
-	// 	// 	}
-	// 	// } else {
-	// 	// 	drinkWater(water)
-	// 	// }
-  // }, []);
-
+	const setDrank = (id) => {
+		const updatedWater = water.map((bottle) => 
+			bottle.id === id ? { ...bottle, isDrank: !bottle.isDrank } : bottle
+		);
+		drinkWater(updatedWater);
+		localStorage.setItem("water", JSON.stringify(updatedWater));
+	};
+	
+	useEffect(() => {
+		const storedWater = localStorage.getItem("water");
+		if (storedWater) {
+			drinkWater(JSON.parse(storedWater));
+		} else {
+			drinkWater(water);
+		}
+	}, []);
+	
   return (
 	<Card>
 		<div className="water-container softcard-container">
 			<ul className="glasses">
-				{waterbottles}
+				{water.map((bottle) => 
+				<li id={bottle} key={bottle.id} >
+					<img 
+						alt="Water bottle" 
+						onClick={() => setDrank(bottle.id)} 
+						src={
+							bottle.isDrank
+							? worter
+							: bortle } 
+					/>
+				</li>
+				)}
 			</ul>
 		</div>
 	</Card>

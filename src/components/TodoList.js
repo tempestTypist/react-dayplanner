@@ -66,7 +66,6 @@ const TodoList = (props) => {
           removeTodo={removeTodo}
           setEdit={setEdit}>
         </Todo>}
-
       </div>
     </Card>
   );

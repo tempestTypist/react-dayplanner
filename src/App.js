@@ -10,10 +10,12 @@ import Hydration from './components/Hydration';
 // import Exercise from './components/Exercise';
 
 function App() {
-  let APIkey = process.env.REACT_APP_APIKEY;
+  let APIkey = process.env.REACT_APP_APIKEY || "503207fa616c17e8668caa7738c54705";
   let requestUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + 42.404804 + "&lon=" + -82.191040 + "&exclude=minutely,hourly,alerts&units=metric&appid=" + APIkey;
+  
   const [weather, setWeather] = useState(null);
   const [windspeed, setWindspeed] = useState(null);
+  const [temp, setTemp] = useState(0)
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -24,17 +26,16 @@ function App() {
       })
       .then(function (weatherData) {
         console.log(weatherData)
-        const main = weatherData.current.weather[0].main;
-        const windspeed = weatherData.current.wind_speed;
-        setWeather(main);
-        setWindspeed(windspeed);
+        setWeather(weatherData.current.weather[0].main);
+        setWindspeed(weatherData.current.wind_speed);
+        setTemp(weatherData.current.temp)
       })
       .catch(error => console.error('Error fetching weather data:', error));
   }, []);
 
-  if (weather === null || windspeed === null) {
-    return <div>Loading...</div>;
-  }
+  // if (weather === null || windspeed === null) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
   <main className="flex-shrink-0">
@@ -43,19 +44,25 @@ function App() {
 
     <Container fluid>
       <Row>
-        <Col>
+        <Col md={5}>
           <Schedule setErrorMessage={setErrorMessage} setShow={setShow} />
         </Col>
-        <Col>
+        <Col md={7}>
           {/* <Notifications /> */}
-          <Weather weather={weather} windspeed={windspeed} />
+          <Weather weather={weather} temp={temp} windspeed={windspeed} />
           <TodoList setErrorMessage={setErrorMessage} setShow={setShow} />
           <Hydration />
           {/* <Menu />
           <Exercise /> */}
         </Col>
-        <Col className="error-container" xs={12}>
-          <Toast className="toast-error" onClose={() => setShow(false)} show={show} delay={3000} autohide>
+        <Col xs={12} className="error-container">
+          <Toast 
+            className="toast-error" 
+            onClose={() => setShow(false)} 
+            show={show} 
+            delay={3000} 
+            autohide
+            >
             <Toast.Body>{errorMessage}</Toast.Body>
           </Toast>
         </Col>

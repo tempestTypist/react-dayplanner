@@ -1,24 +1,24 @@
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 
-function Timeblock(props) {
+function Timeblock({ id, label, reminder, setClass, handleInputChange }) {
   return (
-    <Form className="timeblock-row" onSubmit={props.handleFormSubmit}>
-      <Form.Group as={Row}>
-        <Form.Label className="col-2 hour text-center pt-4">{props.hour}{props.ampm}</Form.Label>
-        <Col lg="9" className="description p-0">
-        <Form.Group
-            as="textarea"
-            type="text"
-            id={props.id} 
-            className={props.setClass(props.time)} 
-            name="reminder"
-            value={props.reminder}
-            onChange={props.handleInputChange}>
-        </Form.Group>
-        </Col>
-        <Button type="submit" className="col-1 saveBtn"></Button>
-      </Form.Group>
-    </Form>
+    <Form.Group as={Row} className={setClass}>
+      <Form.Label className="col-2 hour text-center" htmlFor={`timeblock-${id}`}>
+        {label}
+      </Form.Label>
+      <Col lg="10" className="description p-0">
+        <Form.Control
+          as="textarea"
+          type="text"
+          id={`timeblock-${id}`}
+          aria-labelledby={`timeblock-${id}`}
+          name="reminder"
+          className={setClass}
+          defaultValue={reminder}
+          onChange={handleInputChange}
+        />
+      </Col>
+    </Form.Group>
   );
 }
 

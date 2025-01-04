@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { Form, Row, Col, Card } from 'react-bootstrap';
+import { getCurrentHour } from '../utils/dateUtils';
+import Timeblock from './Timeblock';
 
 const Schedule = (props) => {
   const timeBlocks = [
@@ -30,13 +32,11 @@ const Schedule = (props) => {
   ];
 	const [values, setValues] = useState([timeBlocks]);
 	const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
-
-	const getCurrentHour = () => new Date().getHours();
 	const currentHour = useMemo(() => getCurrentHour(), []);
 
-	const setClass = (HH) => {
-		if (HH < currentHour) return "timeblock-row past";
-		if (HH === currentHour) return "timeblock-row present";
+	const setClass = (hour) => {
+		if (hour < currentHour) return "timeblock-row past";
+		if (hour === currentHour) return "timeblock-row present";
 		return "timeblock-row future";
 	};
 
@@ -48,11 +48,12 @@ const Schedule = (props) => {
 
 	const handleInputChange = (e) => {
 		const { value, id } = e.target;
+    const timeblockId = id.split('-')[1];
 
-		if (values[id].time >= getCurrentHour()) {
+    if (values[timeblockId]?.time >= getCurrentHour()) {
 			setValues((prevValues) => {
 				const newValues = prevValues.map((timeblock) =>
-					timeblock.id === id ? { ...timeblock, reminder: value } : timeblock
+					timeblock.id === timeblockId ? { ...timeblock, reminder: value } : timeblock
 				);
 				saveToLocalStorage(newValues);
 				return newValues;
@@ -76,7 +77,7 @@ const Schedule = (props) => {
     const intervalId = setInterval(checkForDateChange, 60000);
 
     return () => clearInterval(intervalId);
-  }, [currentDate]);
+  }, [currentDate, timeBlocks]);
 
 	useEffect(() => {
 		try {
@@ -101,27 +102,18 @@ const Schedule = (props) => {
           </Col>
         </Row>
 
-        {values.map((timeblock) => (
-          <Form key={`timeblock-${timeblock.id}`} className={setClass(timeblock.time)}>
-            <Form.Group as={Row}>
-              <Form.Label className="col-2 hour text-center" htmlFor={`timeblock-${timeblock.id}`}>
-								{timeblock.hour}{timeblock.ampm}
-							</Form.Label>
-              <Col lg="10" className="description p-0">
-                <Form.Control
-                  as="textarea"
-                  type="text"
-                  id={timeblock.id}
-                  name="reminder"
-									aria-labelledby={`timeblock-${timeblock.id}`}
-                  className={setClass(timeblock.time)}
-                  defaultValue={timeblock.reminder}
-                  onChange={handleInputChange}
-                />
-              </Col>
-            </Form.Group>
-          </Form>
-        ))}
+        <Form>
+          {values.map((timeblock) => (
+            <Timeblock 
+              key={`timeblock-${timeblock.id}`}
+              id={timeblock.id}
+              label={`${timeblock.hour}${timeblock.ampm}`}
+              reminder={timeblock.reminder}
+              setClass={setClass(timeblock.time)}
+              handleInputChange={handleInputChange}
+            />
+          ))}
+        </Form>
       </div>
     </Card>
 	
