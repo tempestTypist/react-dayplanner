@@ -20,6 +20,26 @@ const Hydration = () => {
 		drinkWater(updatedWater);
 		localStorage.setItem("water", JSON.stringify(updatedWater));
 	};
+
+	useEffect(() => {
+    const resetAtMidnight = () => {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(24, 0, 0, 0);
+      const timeUntilMidnight = midnight - now;
+
+      setTimeout(() => {
+        drinkWater(water);
+        localStorage.removeItem("water");
+        
+        resetAtMidnight();
+      }, timeUntilMidnight);
+    };
+
+    resetAtMidnight();
+
+    return () => clearTimeout();
+  }, []);
 	
 	useEffect(() => {
 		const storedWater = localStorage.getItem("water");

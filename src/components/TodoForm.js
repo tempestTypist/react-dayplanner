@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Row, Col, Form, Dropdown, Button } from 'react-bootstrap';
 
-
 function TodoForm(props) {
   const [input, setInput] = useState('');
   let [priority, setPriority] = useState('');
@@ -30,6 +29,7 @@ function TodoForm(props) {
   };
 
   useEffect(() => {
+    setPriority(props.edit.priority)
   }, [props.edit.id]);
 
   return (

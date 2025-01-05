@@ -42,11 +42,14 @@ const TodoList = (props) => {
   };
 
   const editTodo = (itemId, newValue, newPriority) => {
+    console.log(itemId + " " + newValue + " " + newPriority)
+    console.log("edit: " + edit.priority)
     let itemValue = !newValue ? edit.value : newValue
+    let itemPriority = newPriority === edit.priority ? edit.priority : newPriority
 
     setTodo((prevValues) => {
       const newValues = prevValues.map((item) =>
-        item.id === itemId ? { ...item, id: itemId, text: itemValue, priority: newPriority } : item
+        item.id === itemId ? { ...item, id: itemId, text: itemValue, priority: itemPriority } : item
       );
       saveToLocalStorage(newValues);
       return newValues;
@@ -63,6 +66,26 @@ const TodoList = (props) => {
       localStorage.setItem("todo", JSON.stringify(value));
     }
   };
+
+	useEffect(() => {
+    const resetAtMidnight = () => {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(24, 0, 0, 0);
+      const timeUntilMidnight = midnight - now;
+
+      setTimeout(() => {
+        setTodo([todos]);
+        localStorage.removeItem("todo");
+        
+        resetAtMidnight();
+      }, timeUntilMidnight);
+    };
+
+    resetAtMidnight();
+
+    return () => clearTimeout();
+  }, []);
 
   useEffect(() => {
 		try {

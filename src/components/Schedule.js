@@ -31,7 +31,6 @@ const Schedule = (props) => {
     { id: "23", hour: "11", time: "23", ampm: "pm", reminder: "" }
   ], []);
 	const [values, setValues] = useState([timeBlocks]);
-	const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
 	const currentHour = useMemo(() => getCurrentHour(), []);
 
 	const setClass = (hour) => {
@@ -65,19 +64,36 @@ const Schedule = (props) => {
 	};
 
 	useEffect(() => {
-    const checkForDateChange = () => {
-      const currentDay = new Date().toLocaleDateString();
-      if (currentDay !== currentDate) {
+    // const checkForDateChange = () => {
+    //   const currentDay = new Date().toLocaleDateString();
+    //   if (currentDay !== currentDate) {
+    //     setValues(timeBlocks);
+    //     setCurrentDate(currentDay);
+    //     localStorage.removeItem("values"); 
+    //   }
+    // };
+
+    // const intervalId = setInterval(checkForDateChange, 60000);
+
+    // return () => clearInterval(intervalId);
+    const resetAtMidnight = () => {
+      const now = new Date();
+      const midnight = new Date();
+      midnight.setHours(24, 0, 0, 0);
+      const timeUntilMidnight = midnight - now;
+
+      setTimeout(() => {
         setValues(timeBlocks);
-        setCurrentDate(currentDay);
-        localStorage.removeItem("values"); 
-      }
+        localStorage.removeItem("values");
+        
+        resetAtMidnight();
+      }, timeUntilMidnight);
     };
 
-    const intervalId = setInterval(checkForDateChange, 60000);
+    resetAtMidnight();
 
-    return () => clearInterval(intervalId);
-  }, [currentDate, timeBlocks]);
+    return () => clearTimeout();
+  }, []);
 
 	useEffect(() => {
 		try {
