@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card } from 'react-bootstrap';
 import TodoForm from './TodoForm';
 import { Todo } from './Todo';
 
 const TodoList = (props) => {
-
-  const [todo, setTodo] = useState([]);
+  const todos = useMemo(() => [], []);
+  const [todo, setTodo] = useState([todos]);
   const [edit, setEdit] = useState({
     id: null,
     value: '',
@@ -19,8 +19,9 @@ const TodoList = (props) => {
       return;
     }
 
-    const newTodo = [item, ...todo];
+    let newTodo = [item, ...todo];
     setTodo(newTodo);
+    saveToLocalStorage(newTodo);
   };
 
   const completeTodo = (id) => {
@@ -31,27 +32,51 @@ const TodoList = (props) => {
       return item;
     });
     setTodo(updatedTodo);
+    saveToLocalStorage(updatedTodo);
   };
 
   const removeTodo = (id) => {
-    const updatedTodo = [...todo].filter((item) => item.id !== id);
+    let updatedTodo = [...todo].filter((item) => item.id !== id);
     setTodo(updatedTodo);
+    saveToLocalStorage(updatedTodo);
   };
 
-  const editTodo = (itemId, newValue) => {
-    if (!newValue.text) {
-      return;
-    }
+  const editTodo = (itemId, newValue, newPriority) => {
+    let itemValue = !newValue ? edit.value : newValue
 
-    setTodo((prev) =>
-      prev.map((item) => (item.id === itemId ? newValue : item))
-    );
+    setTodo((prevValues) => {
+      const newValues = prevValues.map((item) =>
+        item.id === itemId ? { ...item, id: itemId, text: itemValue, priority: newPriority } : item
+      );
+      saveToLocalStorage(newValues);
+      return newValues;
+    });
   };
 
   const submitUpdate = (value) => {
-    editTodo(edit.id, value);
+    editTodo(edit.id, value.text, value.priority);
     setEdit({ id: null, value: '', priority: '' });
   };
+
+  const saveToLocalStorage = (value) => {
+    if (localStorage) {
+      localStorage.setItem("todo", JSON.stringify(value));
+    }
+  };
+
+  useEffect(() => {
+		try {
+			const storedTodos = localStorage.getItem("todo");
+			if (storedTodos) {
+				setTodo(JSON.parse(storedTodos));
+			} else {
+				setTodo(todos);
+			}
+		} catch (error) {
+			console.error('Failed to load todos from localStorage:', error);
+			setTodo(todos);
+		}
+	}, [todos]);
 
   return (
     <Card>
@@ -60,7 +85,8 @@ const TodoList = (props) => {
           onSubmit={edit.id ? submitUpdate : addTodo}
           edit={edit} />
 
-        {edit.id ? <></> : <Todo
+        {edit.id ? <></> : 
+        <Todo
           todo={todo}
           completeTodo={completeTodo}
           removeTodo={removeTodo}

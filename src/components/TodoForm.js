@@ -39,7 +39,7 @@ function TodoForm(props) {
 
 			<Form className="todo-form" onSubmit={handleSubmit}>
 				<Form.Group as={Row}>
-					<Col md={8}>
+					<Col xs={12} xl={8}>
             <Form.Control 
             type="text" 
             placeholder={props.edit.id ? props.edit.value : "Add item..."}
@@ -48,7 +48,7 @@ function TodoForm(props) {
             className="todo-input"
             onChange={handleChange} />
 					</Col>
-					<Col md={2}>
+					<Col xs={6} xl={2}>
             <Dropdown className="p-0">
               <Dropdown.Toggle className={`dropbtn ${priority}`}>
                 {priority || 'Priority'}
@@ -61,7 +61,7 @@ function TodoForm(props) {
               </Dropdown.Menu>
             </Dropdown>
 					</Col>
-					<Col md={2}>
+					<Col xs={6} xl={2}>
 						<Button type="submit" className="dropbtn">
                 {props.edit.id ? "Update" : "Add"}
             </Button>

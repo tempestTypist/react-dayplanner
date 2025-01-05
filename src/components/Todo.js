@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faExclamationCircle, faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
-export const Todo = (props) => {
+export const Todo = ({ todo, completeTodo, setEdit, removeTodo }) => {
 
-  return props.todo.map((item, i) => (
+  return todo.map((item, i) => (
     <div
       className={
         item.isComplete
@@ -12,7 +12,7 @@ export const Todo = (props) => {
       }
       key={i}>
         
-      <div key={item.id} onClick={() => props.completeTodo(item.id)}>
+      <div key={item.id} onClick={() => completeTodo(item.id)}>
         <FontAwesomeIcon 
           icon={
             item.isComplete 
@@ -22,8 +22,8 @@ export const Todo = (props) => {
       </div>
 
       <div className="icons">
-        <p onClick={() => props.setEdit({ id: item.id, value: item.text, priority: item.priority })}> <FontAwesomeIcon icon={faPencilAlt} className="me-2" /></p>
-        <p onClick={() => props.removeTodo(item.id)}> <FontAwesomeIcon icon={faTrash} /></p>
+        <p onClick={() => setEdit({ id: item.id, value: item.text, priority: item.priority }, console.log("setEdit: " + item.id + " " + item.text + " " + item.priority))}> <FontAwesomeIcon icon={faPencilAlt} className="me-2" /></p>
+        <p onClick={() => removeTodo(item.id)}> <FontAwesomeIcon icon={faTrash} /></p>
       </div>
     </div>
   ));

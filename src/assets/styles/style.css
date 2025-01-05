@@ -339,6 +339,12 @@ input:focus {
   margin-bottom: 1rem;
 }
 
+@media (max-width: 1200px) { 
+  .todo-form .row div:first-child {
+    margin-bottom: 1rem;
+  }
+}
+
 .todo-input {
   padding: 14px 32px 14px 16px;
   border: 3px dashed #c77dff;

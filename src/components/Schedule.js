@@ -4,7 +4,7 @@ import { getCurrentHour } from '../utils/dateUtils';
 import Timeblock from './Timeblock';
 
 const Schedule = (props) => {
-  const timeBlocks = [
+  const timeBlocks = useMemo(() => [
     { id: "0", hour: "12", time: "00", ampm: "am", reminder: "" },
     { id: "1", hour: "1", time: "01", ampm: "am", reminder: "" },
     { id: "2", hour: "2", time: "02", ampm: "am", reminder: "" },
@@ -29,7 +29,7 @@ const Schedule = (props) => {
     { id: "21", hour: "9", time: "21", ampm: "pm", reminder: "" },
     { id: "22", hour: "10", time: "22", ampm: "pm", reminder: "" },
     { id: "23", hour: "11", time: "23", ampm: "pm", reminder: "" }
-  ];
+  ], []);
 	const [values, setValues] = useState([timeBlocks]);
 	const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
 	const currentHour = useMemo(() => getCurrentHour(), []);
@@ -40,9 +40,9 @@ const Schedule = (props) => {
 		return "timeblock-row future";
 	};
 
-  const saveToLocalStorage = () => {
+  const saveToLocalStorage = (value) => {
     if (localStorage) {
-      localStorage.setItem("values", JSON.stringify(values));
+      localStorage.setItem("values", JSON.stringify(value));
     }
   };
 
@@ -91,7 +91,7 @@ const Schedule = (props) => {
 			console.error('Failed to load schedule from localStorage:', error);
 			setValues(timeBlocks);
 		}
-	}, []);
+	}, [timeBlocks]);
 
   return (
     <Card>
