@@ -1,5 +1,5 @@
 # React Dayplanner
-![NPM badge](https://img.shields.io/npm/v/:packageName)
+[![Node version](https://img.shields.io/node/v/20.12.2.svg?style=flat)](https://nodejs.org/download/)
 
 ![Dayplanner preview image](./src/assets/images/preview-img.png)
 
