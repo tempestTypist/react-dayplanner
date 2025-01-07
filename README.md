@@ -1,5 +1,7 @@
 # React Dayplanner
-[![Node version](https://img.shields.io/node/v/20.12.2.svg?style=flat)](https://nodejs.org/download/)
+![Node version](https://img.shields.io/node/v/20.12.2.svg?style=plastic)](https://nodejs.org/download/)
+![Static Badge](https://img.shields.io/badge/build-passing-brightgreen?style=plastic)
+
 
 ![Dayplanner preview image](./src/assets/images/preview-img.png)
 
