@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { Form, Row, Col, Card } from 'react-bootstrap';
 import { getCurrentHour } from '../utils/dateUtils';
 import Timeblock from './Timeblock';
+import ClearBtn from './ClearBtn';
 
 const Schedule = (props) => {
   const timeBlocks = useMemo(() => [
@@ -30,7 +31,7 @@ const Schedule = (props) => {
     { id: "22", hour: "10", time: "22", ampm: "pm", reminder: "" },
     { id: "23", hour: "11", time: "23", ampm: "pm", reminder: "" }
   ], []);
-	const [values, setValues] = useState([timeBlocks]);
+	const [timeblock, setTimeblocks] = useState(timeBlocks);
 	const currentHour = useMemo(() => getCurrentHour(), []);
 
 	const setClass = (hour) => {
@@ -41,7 +42,7 @@ const Schedule = (props) => {
 
   const saveToLocalStorage = (value) => {
     if (localStorage) {
-      localStorage.setItem("values", JSON.stringify(value));
+      localStorage.setItem("timeblock", JSON.stringify(value));
     }
   };
 
@@ -49,10 +50,10 @@ const Schedule = (props) => {
 		const { value, id } = e.target;
     const timeblockId = id.split('-')[1];
 
-    if (values[timeblockId]?.time >= getCurrentHour()) {
-			setValues((prevValues) => {
-				const newValues = prevValues.map((timeblock) =>
-					timeblock.id === timeblockId ? { ...timeblock, reminder: value } : timeblock
+    if (timeblock[timeblockId]?.time >= getCurrentHour()) {
+			setTimeblocks((prevValues) => {
+				const newValues = prevValues.map((tb) =>
+					tb.id === timeblockId ? { ...tb, reminder: value } : tb
 				);
 				saveToLocalStorage(newValues);
 				return newValues;
@@ -64,18 +65,6 @@ const Schedule = (props) => {
 	};
 
 	useEffect(() => {
-    // const checkForDateChange = () => {
-    //   const currentDay = new Date().toLocaleDateString();
-    //   if (currentDay !== currentDate) {
-    //     setValues(timeBlocks);
-    //     setCurrentDate(currentDay);
-    //     localStorage.removeItem("values"); 
-    //   }
-    // };
-
-    // const intervalId = setInterval(checkForDateChange, 60000);
-
-    // return () => clearInterval(intervalId);
     const resetAtMidnight = () => {
       const now = new Date();
       const midnight = new Date();
@@ -83,29 +72,27 @@ const Schedule = (props) => {
       const timeUntilMidnight = midnight - now;
 
       setTimeout(() => {
-        setValues(timeBlocks);
-        localStorage.removeItem("values");
+        setTimeblocks(timeBlocks);
+        localStorage.removeItem("timeblock");
         
         resetAtMidnight();
       }, timeUntilMidnight);
     };
 
     resetAtMidnight();
-
-    return () => clearTimeout();
   }, []);
 
 	useEffect(() => {
 		try {
-			const storedDay = localStorage.getItem("values");
+			const storedDay = localStorage.getItem("timeblock");
 			if (storedDay) {
-				setValues(JSON.parse(storedDay));
+				setTimeblocks(JSON.parse(storedDay));
 			} else {
-				setValues(timeBlocks);
+				setTimeblocks(timeBlocks);
 			}
 		} catch (error) {
 			console.error('Failed to load schedule from localStorage:', error);
-			setValues(timeBlocks);
+			setTimeblocks(timeBlocks);
 		}
 	}, [timeBlocks]);
 
@@ -113,19 +100,26 @@ const Schedule = (props) => {
     <Card>
       <div className="dayplanner-container softcard-container">
         <Row className="border-dark border-bottom">
-          <Col xs={12}>
+          <Col xs={8}>
             <h2 className="p-2 ps-4">Schedule</h2>
+          </Col>
+          <Col xs={4}>
+            <ClearBtn 
+              lsName="timeblock"
+              defaultState={timeBlocks}
+              stateSet={setTimeblocks}
+            />
           </Col>
         </Row>
 
         <Form>
-          {values.map((timeblock) => (
+          {timeblock.map((tb) => (
             <Timeblock 
-              key={`timeblock-${timeblock.id}`}
-              id={timeblock.id}
-              label={`${timeblock.hour}${timeblock.ampm}`}
-              reminder={timeblock.reminder}
-              setClass={setClass(timeblock.time)}
+              key={`timeblock-${tb.id}`}
+              id={tb.id}
+              label={`${tb.hour}${tb.ampm}`}
+              reminder={tb.reminder}
+              setClass={setClass(tb.time)}
               handleInputChange={handleInputChange}
             />
           ))}

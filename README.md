@@ -1,6 +1,7 @@
 # React Dayplanner
-![Node version](https://img.shields.io/node/v/20.12.2.svg?style=plastic)](https://nodejs.org/download/)
-![Static Badge](https://img.shields.io/badge/build-passing-brightgreen?style=plastic)
+[![Node version](https://img.shields.io/node/v/20.12.2.svg?style=plastic)](https://nodejs.org/download/)
+![Build status](https://img.shields.io/badge/build-passing-brightgreen?style=plastic) 
+![React version](https://img.shields.io/badge/react-%5E17.0.2-blue?style=plastic)
 
 
 ![Dayplanner preview image](./src/assets/images/preview-img.png)

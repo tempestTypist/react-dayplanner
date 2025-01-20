@@ -75,7 +75,7 @@ const TodoList = (props) => {
       const timeUntilMidnight = midnight - now;
 
       setTimeout(() => {
-        setTodo([todos]);
+        setTodo(todos);
         localStorage.removeItem("todo");
         
         resetAtMidnight();
@@ -85,7 +85,7 @@ const TodoList = (props) => {
     resetAtMidnight();
 
     return () => clearTimeout();
-  }, []);
+  }, [todos]);
 
   useEffect(() => {
 		try {
@@ -108,7 +108,7 @@ const TodoList = (props) => {
           onSubmit={edit.id ? submitUpdate : addTodo}
           edit={edit} />
 
-        {edit.id ? <></> : 
+        {edit.id || todo.length === 0 ? <></> : 
         <Todo
           todo={todo}
           completeTodo={completeTodo}
