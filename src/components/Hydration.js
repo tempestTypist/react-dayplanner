@@ -39,7 +39,7 @@ const Hydration = () => {
     resetAtMidnight();
 
     return () => clearTimeout();
-  }, []);
+  }, [water]);
 	
 	useEffect(() => {
 		const storedWater = localStorage.getItem("water");
