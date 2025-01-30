@@ -31,7 +31,7 @@ function App() {
         setTemp(weatherData.current.temp)
       })
       .catch(error => console.error('Error fetching weather data:', error));
-  }, []);
+  }, [requestUrl]);
 
   // if (weather === null || windspeed === null) {
   //   return <div>Loading...</div>;
