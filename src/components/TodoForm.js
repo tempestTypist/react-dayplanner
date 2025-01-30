@@ -30,7 +30,7 @@ function TodoForm(props) {
 
   useEffect(() => {
     setPriority(props.edit.priority)
-  }, [props.edit.id]);
+  }, [props.edit.id, props.edit.priority]);
 
   return (
     <div>

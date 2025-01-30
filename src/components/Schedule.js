@@ -80,7 +80,7 @@ const Schedule = (props) => {
     };
 
     resetAtMidnight();
-  }, []);
+  }, [timeBlocks]);
 
 	useEffect(() => {
 		try {

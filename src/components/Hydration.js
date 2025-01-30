@@ -48,7 +48,7 @@ const Hydration = () => {
 		} else {
 			drinkWater(water);
 		}
-	}, []);
+	}, [water]);
 	
   return (
 	<Card>
