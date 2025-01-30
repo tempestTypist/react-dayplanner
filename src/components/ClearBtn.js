@@ -19,9 +19,11 @@ const ClearBtn = ({ lsName, defaultState, stateSet }) => {
   }
 
   return (
-    <Button type="submit" className="dropbtn" onClick={() => clear(lsName, defaultState)}>
-      Clear
-    </Button>
+    <div className="clear-btn me-2">
+      <Button type="submit" className="clearbtn" onClick={() => clear(lsName, defaultState)}>
+        Clear
+      </Button>
+    </div>
   );
 };
 

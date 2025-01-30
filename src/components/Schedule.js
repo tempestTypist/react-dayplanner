@@ -100,10 +100,8 @@ const Schedule = (props) => {
     <Card>
       <div className="dayplanner-container softcard-container">
         <Row className="border-dark border-bottom">
-          <Col xs={8}>
-            <h2 className="p-2 ps-4">Schedule</h2>
-          </Col>
-          <Col xs={4}>
+          <Col className="d-flex">
+            <h2 className="p-2 ps-4 pe-4">Schedule</h2>
             <ClearBtn 
               lsName="timeblock"
               defaultState={timeBlocks}

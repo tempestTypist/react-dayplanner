@@ -126,14 +126,18 @@ input:focus {
 }
 
 .banner.twilight.rain {
-  background-image: url('../images/banner-images/rain.gif'), url('../images/banner-images/twilight.jpg');
+  background-image: 
+                    url('../images/banner-images/rain.gif'), 
+                    url('../images/banner-images/twilight.jpg');
   background-size: contain, cover;
   background-repeat: repeat, no-repeat;
   background-position: center;
 }
 
 .banner.twilight.snow {
-  background-image: url('../images/banner-images/snow.gif'), url('../images/banner-images/twilight.jpg');
+  background-image: 
+                    url('../images/banner-images/snow.gif'), 
+                    url('../images/banner-images/twilight.jpg');
   background-size: contain, cover;
   background-repeat: repeat, no-repeat;
   background-position: center;
@@ -148,14 +152,18 @@ input:focus {
 }
 
 .banner.night.rain {
-  background-image: url('../images/banner-images/rain.gif'), url('../images/banner-images/night-cloudy.jpg');
+  background-image: 
+                    url('../images/banner-images/rain.gif'), 
+                    url('../images/banner-images/night-cloudy.jpg');
   background-size: contain, cover;
   background-repeat: repeat, no-repeat;
   background-position: center;
 }
 
 .banner.night.snow {
-  background-image: url('../images/banner-images/snow.gif'), url('../images/banner-images/night-cloudy.jpg');
+  background-image: 
+                    url('../images/banner-images/snow.gif'), 
+                    url('../images/banner-images/night-cloudy.jpg');
   background-size: contain, cover;
   background-repeat: repeat, no-repeat;
   background-position: center;
@@ -168,8 +176,7 @@ input:focus {
   padding: 8px 8px;
   margin-bottom: 1.4rem;
   background-color: #9D4EDD;
-  background-image: url("https://www.transparenttextures.com/patterns/brilliant.png");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+  background-image: url("../images/bg-texture.png");
 }
 
 .softcard-container {
@@ -217,7 +224,7 @@ input:focus {
   border-bottom: 1px solid #3C096C; }
   .timeblock-row:last-child {
     border-bottom: none; }
-  .timeblock-row:nth-child(even) {
+  .timeblock-row:nth-child(odd) {
     background-color: rgb(0, 0, 0, .05) }
   .timeblock-row textarea {
     background-color: transparent;
@@ -231,6 +238,7 @@ input:focus {
   justify-content: center;
   align-self: center;
   flex-wrap: nowrap;
+  padding-left: 16px
 }
 
 .description {
@@ -259,6 +267,10 @@ input:focus {
     display: flex;
     flex-direction: column;
     align-items: flex-start; }
+}
+
+.weather-container h2 {
+  line-height: 1
 }
 
 .weather-container ul {
@@ -439,6 +451,38 @@ input:focus {
   vertical-align: middle;
 }
 
+/* Clear Button */
+.clear-btn {
+  display: flex;
+  align-self: center;
+  padding: 4px;
+  color: #fff;
+  border-color: #c77dff;
+  background-color: #5A189A;
+  border-radius: 30px;
+  width:fit-content
+}
+
+.clearbtn {
+  background-color: #5A189A;
+  border: 2px dashed #c77dff;
+  border-radius: 30px;
+  font-size: 1.6rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.clearbtn:hover {
+  color: inherit !important; 
+  background-color: #521491 !important;
+  border-color: inherit !important;
+}
+
+.clearbtn:active {
+  color: inherit !important; 
+  background-color: #480e81 !important;
+  border-color: inherit !important;
+}
 
 /* Dropdown Button */
 .dropbtn {
@@ -446,6 +490,7 @@ input:focus {
   border-radius: 4px;
   color: white;
   font-size: 1.4rem;
+  min-width: fit-content;
   width: 100%;
   height: 100%;
   border: none;

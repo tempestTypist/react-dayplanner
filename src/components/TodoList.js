@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
-import { Card } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 import TodoForm from './TodoForm';
 import { Todo } from './Todo';
+import ClearBtn from './ClearBtn';
 
 const TodoList = (props) => {
   const todos = useMemo(() => [], []);
@@ -104,6 +105,21 @@ const TodoList = (props) => {
   return (
     <Card>
       <div className="todo-container softcard-container">
+        {edit.id ? 
+          <h2>Update entry: {edit.value}</h2> 
+          : 
+          <Row className="pb-3">
+            <Col className="d-flex">
+              <h2 className="me-4">To Do</h2>
+              <ClearBtn 
+              lsName="todo"
+              defaultState={todos}
+              stateSet={setTodo}
+              />
+            </Col>
+          </Row>
+        }
+
         <TodoForm 
           onSubmit={edit.id ? submitUpdate : addTodo}
           edit={edit} />
